@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+option go_package = "epistemic-me-backend/pb/models";
+
+import "proto/models/source.proto";
+import "proto/models/temporal.proto";
+
+// A confidence rating on a belief represents
+// a score that determines how likely the system
+// evaluates the belief to be given available evidence.
+message ConfidenceRating {
+    double confidence_score = 1; // The confidence score of the belief.
+    bool default = 2;            // Whether this confidence rating is the default.
+}
+
+// The content of a belief represents 
+// what that belief is about, through
+// natural language.
+message Content {
+    string raw_str = 1; // The raw string representation of the belief content.
+}
+
+// Enum to distinguish between causal and statement beliefs
+enum BeliefType {
+    CAUSAL = 0;
+    STATEMENT = 1;
+}
+
+// Message representing a belief
+message Belief {
+    string id = 1;                              // Unique identifier for the belief.
+    string user_id = 2;                         // Identifier for the user who holds the belief.
+    int32 version = 3;                          // Version number of the belief.
+    repeated ConfidenceRating confidence_ratings = 4; // Confidence ratings of the belief.
+    repeated Source sources = 5;                // Sources from which the belief is derived.
+    repeated Content content = 6;               // Content of the belief.
+    BeliefType type = 7;                        // Type of the belief.
+    CausalBelief causal_belief = 8;             // Optional field for causal beliefs.
+    TemporalInformation temporal_information = 9; // Temporal information
+
+    // Nested message for causal belief details
+    message CausalBelief {
+        int32 intervention_id = 1;
+        string intervention_name = 2;            // External name for the intervention
+        int32 observation_context_id = 3;
+        string observation_context_name = 4;     // External name for the observation context
+    }
+}
+
+// A belief system represents a quick synthesis of a user's
+// beliefs into a compressed natural language representation
+// of the user's worldview. This belief system can be used
+// to initiate further dialectical questions to gain better
+// understanding of a user's beliefs.
+message BeliefSystem {
+    string raw_str = 1; // The raw string representation of the belief system.
+    double overall_confidence_rating = 2; // Overall confidence rating produced as a result of all beliefs it summarizes
+    double clarification_score = 3; // Score indicating how much beliefs conflict with each other
+}
