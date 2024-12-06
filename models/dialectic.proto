@@ -156,9 +156,9 @@ message BeliefAnalysis {
 
 // Action represents a way to change the world state
 message Action {
-    ActionType type = 1;
-    string dialectic_interaction_id = 2;  // Reference to the interaction
-    string resource_id = 3;               // Reference to the resource used
+    string id = 1;                    // Unique identifier for the action
+    ActionType type = 2;
+    string dialectic_interaction_id = 3;  // Reference to the interaction
     string intervention_id = 4;           // Optional reference to a defined intervention
     int64 timestamp = 5;
 }
@@ -175,8 +175,8 @@ enum ObservationType {
 message Observation {
     string dialectic_interaction_id = 1;
     ObservationType type = 2;
-    Source source = 3;
-    map<string, float> state_distribution = 4;  // Maps state_id to probability
+    Resource resource = 3;
+    map<string, float> state_distribution = 4;
     int64 timestamp = 5;
 }
 
