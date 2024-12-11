@@ -78,10 +78,12 @@ message ListDialecticsResponse {
 // Request message for updating an existing dialectic.
 message UpdateDialecticRequest {
     string id = 1;
-    UserAnswer answer = 2; 
-    string self_model_id = 3;
+    string self_model_id = 2;
+    UserAnswer answer = 3;
     bool dry_run = 4;
-    string custom_question = 5;  // Optional custom question for next interaction
+    string custom_question = 5;
+    string question_blob = 6;
+    string answer_blob = 7;
 }
 
 // Response message for updating an existing dialectic.
