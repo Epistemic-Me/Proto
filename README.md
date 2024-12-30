@@ -16,7 +16,6 @@ Before you begin contributing to the Proto Repo, it's important to ensure that y
    - Open Cursor and navigate to 'File' > 'Open Workspace'.
    - Select the directory where you cloned the proto repo.
    - Ensure that Cursor's protobuf plugins or extensions are enabled and configured to highlight syntax and provide language support.
-4. **Check Coding Standards**: Familiarize yourself with the coding standards and conventions described in the `README.md`. This includes naming conventions, comment styles, and file organization. Adhering to these standards helps maintain code quality and consistency across the project.
 
 ## Making Contributions
 
@@ -28,6 +27,7 @@ Create a new branch from the main branch for your contributions. Use descriptive
 
 ### Define Data Models
 - Modify or add new protobuf definitions as needed. Ensure that new fields are optional or have default values to maintain backward compatibility.
+- We currently rely on using GitSubmodules to version changes to Proto files, we expect that updates to the Proto library also incur the responsibility of updating any official consumers: currenlty the Typescript and Server repos.
 - Clearly comment on your changes within the models to explain their purpose and usage.
 
 ### Add Examples
