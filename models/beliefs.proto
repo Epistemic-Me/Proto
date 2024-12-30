@@ -44,12 +44,40 @@ message EpistemicContexts {
 message EpistemicContext {
     oneof context {
         PredictiveProcessingContext predictive_processing_context = 1;
+        // The belief tree node enables us to treat a given beleif
+        // as a node within a larger tree of beleifs.  
+        BeliefTreeContext belief_tree_context = 2;
+        // A way to track "side-quests" that spin off from a given set of beleifs
+        // or beleif system. Can be discarded or become a primary new beleif system.
+        ExploratoryContext exploratory_context = 3;
     }
 }
 
-// BeliefSystem with conceptualization
+// A list of beleifs (belief space) that are currently being utilized (working memory)
+// Epistemic contexts enable us to orchestrate epistemologies on top of beleifs
+// (e.g. Predictive Processing, Belief Trees)
 message BeliefSystem {
     repeated Belief beliefs = 1;
     EpistemicContexts epistemic_contexts = 2;
 }
 
+message BeliefTreeContext {
+    // the current belief being looked at in this node of a Tree
+    string belief_id = 1;
+    // the belief that this beleif was generated from. This is kept 
+    // as a list for optionality where this belief is linked to
+    // other parent beleifs in the future. 
+    repeated string parent_beliefs = 2;
+    // The child beleifs that make up this belief. Can also be considered
+    // to be the assumptions that make up a beleif
+    repeated string child_beliefs = 3;
+    // The supporting data, evidence, literature etc that surrounds a belief
+    repeated Source supporting_sources= 4;
+    // The counter sources that don't support a given beleif
+    repeated Source counter_sources = 5;
+}
+
+message ExploratoryContext {
+    repeated string originating_beliefs = 1;
+    BeliefSystem belief_system = 2;
+}

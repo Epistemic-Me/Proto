@@ -2,6 +2,8 @@ syntax = "proto3";
 
 option go_package = "epistemic-me-core/pb/models";
 
+import "proto/models/source.proto";
+
 message PredictiveProcessingContext {
     repeated ObservationContext observation_contexts = 2;
     repeated BeliefContext belief_contexts = 3;
