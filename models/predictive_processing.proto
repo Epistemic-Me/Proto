@@ -2,6 +2,8 @@ syntax = "proto3";
 
 option go_package = "epistemic-me-core/pb/models";
 
+import "proto/models/source.proto";
+
 message PredictiveProcessingContext {
     repeated ObservationContext observation_contexts = 2;
     repeated BeliefContext belief_contexts = 3;
@@ -67,6 +69,11 @@ message ObservationContext {
     
     // Sources of evidence for this context
     repeated Source sources = 8;
+}
+
+message ConfidenceRating {
+    double confidence_score = 1;
+    bool default = 2;
 }
 
 // Types of epistemic emotions that emerge from discrepancies
