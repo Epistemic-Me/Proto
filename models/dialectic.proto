@@ -3,7 +3,7 @@ syntax = "proto3";
 option go_package = "epistemic-me-core/pb/models";
 
 import "proto/models/beliefs.proto";
-import "proto/models/source.proto";
+import "proto/models/predictive_processing.proto";
 
 // Add STATUS enum definition
 enum STATUS {

@@ -3,15 +3,11 @@ syntax = "proto3";
 option go_package = "epistemic-me-core/pb/models";
 
 import "proto/models/predictive_processing.proto";
+import "proto/models/source.proto";
 
 // Base content and confidence messages
 message Content {
     string raw_str = 1;
-}
-
-message ConfidenceRating {
-    double confidence_score = 1;
-    bool default = 2;
 }
 
 // Belief types
@@ -64,7 +60,7 @@ message BeliefSystem {
 message BeliefTreeContext {
     // the current belief being looked at in this node of a Tree
     string belief_id = 1;
-    // the belief that this beleif was generated from. This is kept 
+    // the belief that this belief was generated from. This is kept 
     // as a list for optionality where this belief is linked to
     // other parent beleifs in the future. 
     repeated string parent_beliefs = 2;

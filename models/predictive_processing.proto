@@ -71,6 +71,11 @@ message ObservationContext {
     repeated Source sources = 8;
 }
 
+message ConfidenceRating {
+    double confidence_score = 1;
+    bool default = 2;
+}
+
 // Types of epistemic emotions that emerge from discrepancies
 enum EpistemicEmotion {
     EMOTION_INVALID = 0;
