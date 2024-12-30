@@ -40,6 +40,17 @@ message BeliefContext {
     float emotion_intensity = 7;
 }
 
+// Add a new message for the analysis
+message BeliefAnalysis {
+    float coherence = 1;
+    float consistency = 2;
+    float falsifiability = 3;
+    float overall_score = 4;
+    string feedback = 5;
+    repeated string recommendations = 6;
+    repeated string verified_beliefs = 7;
+}
+
 // ObservationContext represents a context in which states can be observed
 message ObservationContext {
     string id = 1;
@@ -65,4 +76,53 @@ enum EpistemicEmotion {
     SURPRISE = 2;
     CURIOSITY = 3;
     CONFUSION = 4;
+}
+
+message PredictionContext {
+    Observation predicted_observation = 7;
+    Action action = 8;
+    Observation observation = 9;
+    Discrepancy discrepancy = 10;
+}
+
+// Add ActionType enum
+enum ActionType {
+    ACTION_TYPE_INVALID = 0;
+    ANSWER_QUESTION = 1;
+    COLLECT_EVIDENCE = 2;
+    ACTUATE_OUTCOME = 3;
+}
+
+// Action represents a way to change the world state
+message Action {
+    string id = 1;                    // Unique identifier for the action
+    ActionType type = 2;
+    string dialectic_interaction_id = 3;  // Reference to the interaction
+    string intervention_id = 4;           // Optional reference to a defined intervention
+    int64 timestamp = 5;
+}
+
+// Move ObservationType here from beliefs.proto
+enum ObservationType {
+    OBSERVATION_TYPE_INVALID = 0;
+    ANSWER = 1;
+    EVIDENCE = 2;
+    OUTCOME = 3;
+}
+
+// Observation represents the observed state after an action
+message Observation {
+    string dialectic_interaction_id = 1;
+    ObservationType type = 2;
+    Resource resource = 3;
+    map<string, float> state_distribution = 4;
+    int64 timestamp = 5;
+}
+
+// Update Discrepancy to remove observation_type
+message Discrepancy {
+    string dialectic_interaction_id = 1;  // Relationship to interaction
+    double kl_divergence = 2;            // KL(P||Q) where P is predicted and Q is observed
+    map<string, float> pointwise_kl_terms = 3;  // P(x) * log(P(x)/Q(x)) for each state
+    int64 timestamp = 4;
 }
