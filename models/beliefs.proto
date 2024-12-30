@@ -2,7 +2,7 @@ syntax = "proto3";
 
 option go_package = "epistemic-me-core/pb/models";
 
-import "proto/models/observation_context.proto";
+import "proto/models/predictive_processing.proto";
 
 // Base content and confidence messages
 message Content {
@@ -22,26 +22,6 @@ enum BeliefType {
     CAUSAL = 3;
 }
 
-// Types of epistemic emotions that emerge from discrepancies
-enum EpistemicEmotion {
-    EMOTION_INVALID = 0;
-    CONFIRMATION = 1;
-    SURPRISE = 2;
-    CURIOSITY = 3;
-    CONFUSION = 4;
-}
-
-// BeliefContext represents the relationship between a Belief and an ObservationContext
-message BeliefContext {
-    string belief_id = 1;
-    string observation_context_id = 2;
-    repeated ConfidenceRating confidence_ratings = 3;
-    map<string, float> conditional_probabilities = 4;
-    repeated string discrepancy_ids = 5;
-    EpistemicEmotion epistemic_emotion = 6;
-    float emotion_intensity = 7;
-}
-
 // The main Belief message
 message Belief {
     string id = 1;
@@ -51,25 +31,25 @@ message Belief {
     repeated Content content = 5;
 }
 
+// Epistemologies active on a given set of beliefs can continue from
+// their existing epistemic contexts or draw from other epistemic context
+// (e.g. faith based epistemic context draws from predictive processing context
+message EpistemicContexts {
+    repeated EpistemicContext EpistemicContexts = 1;
+}
+
+// Epistemic Context is a data structure for storing the needed parameters
+// and memory to continue enacting a specific epistemology
+// (e.g. predective processing, etc.)
+message EpistemicContext {
+    oneof context {
+        PredictiveProcessingContext predictive_processing_context = 1;
+    }
+}
+
 // BeliefSystem with conceptualization
 message BeliefSystem {
     repeated Belief beliefs = 1;
-    repeated ObservationContext observation_contexts = 2;
-    repeated BeliefContext belief_contexts = 3;
-    
-    message Metrics {
-        double clarification_score = 1;
-        int32 total_beliefs = 2;
-        int32 total_falsifiable_beliefs = 3;
-        int32 total_causal_beliefs = 4;
-        int32 total_belief_statements = 5;
-    }
-    Metrics metrics = 4;
-
-    message Ontology {
-        string raw_str = 1;
-        int64 generated_at = 2;
-        repeated BeliefContext contexts = 3;
-    }
-    Ontology ontology = 5;
+    EpistemicContexts epistemic_contexts = 2;
 }
+
