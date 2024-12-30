@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+option go_package = "epistemic-me-core/pb/models";
+
+message PredictiveProcessingContext {
+    repeated ObservationContext observation_contexts = 2;
+    repeated BeliefContext belief_contexts = 3;
+}
+
+message Metrics {
+    double clarification_score = 1;
+    int32 total_beliefs = 2;
+    int32 total_falsifiable_beliefs = 3;
+    int32 total_causal_beliefs = 4;
+    int32 total_belief_statements = 5;
+}
+
+message Ontology {
+    string raw_str = 1;
+    int64 generated_at = 2;
+    repeated BeliefContext contexts = 3;
+}
+
+// Possible state in an observation context
+message State {
+    string id = 1;
+    string name = 2;
+    string description = 3;
+    map<string, float> properties = 4;  // Measurable properties of this state
+}
+
+// BeliefContext represents the relationship between a Belief and an ObservationContext
+message BeliefContext {
+    string belief_id = 1;
+    string observation_context_id = 2;
+    repeated ConfidenceRating confidence_ratings = 3;
+    map<string, float> conditional_probabilities = 4;
+    repeated string discrepancy_ids = 5;
+    EpistemicEmotion epistemic_emotion = 6;
+    float emotion_intensity = 7;
+}
+
+// ObservationContext represents a context in which states can be observed
+message ObservationContext {
+    string id = 1;
+    string name = 2;
+    string parent_id = 3;
+    string description = 4;
+    
+    // States that can be observed in this context
+    repeated State possible_states = 5;
+    
+    // Current state
+    string current_state_id = 6;
+    int64 last_updated = 7;
+    
+    // Sources of evidence for this context
+    repeated Source sources = 8;
+}
+
+// Types of epistemic emotions that emerge from discrepancies
+enum EpistemicEmotion {
+    EMOTION_INVALID = 0;
+    CONFIRMATION = 1;
+    SURPRISE = 2;
+    CURIOSITY = 3;
+    CONFUSION = 4;
+}
