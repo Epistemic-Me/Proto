@@ -49,7 +49,7 @@ Request reviews from project maintainers or other contributors. Make necessary r
 1. **Pull Latest Changes**: Once your PR is merged, update your local main branch in the proto repo and pull the latest changes:
 2. **Update Submodule Reference**: In the root directory of any dependent repositories (like the TypeScript SDK or Server backend), update the proto submodule:
 3. **Test and Push Changes**: Ensure the updates do not break any existing functionality by running tests or builds. Push these changes:
-4. 4. **Pull Requests for Parent Repos**: Open pull requests in the parent repositories to merge the submodule updates, linking back to the proto repo changes.
+4. **Pull Requests for Parent Repos**: Open pull requests in the parent repositories to merge the submodule updates, linking back to the proto repo changes.
 5. **Review and Merge**: These updates require review. Notify maintainers to ensure a thorough check and integration.
 
 ## Community and Support
