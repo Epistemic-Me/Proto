@@ -58,6 +58,10 @@ message CreateBeliefResponse {
 message CreateDialecticRequest {
     string self_model_id = 1;
     DialecticType dialectic_type = 2;
+    // Which self models should be attached to the dialectic
+    // to provide perspectives alongside each question and
+    // answer dialectic 
+    repeated string perspective_model_ids = 3;
 }
 
 // Response message for creating a new dialectic.
