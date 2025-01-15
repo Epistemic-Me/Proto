@@ -88,6 +88,7 @@ message UpdateDialecticRequest {
     string custom_question = 5;
     string question_blob = 6;
     string answer_blob = 7;
+    repeated string extracted_beliefs = 8;
 }
 
 // Response message for updating an existing dialectic.
@@ -174,4 +175,3 @@ message GetDeveloperRequest {
 message GetDeveloperResponse {
     Developer developer = 1;
 }
-

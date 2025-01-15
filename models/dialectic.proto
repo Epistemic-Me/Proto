@@ -76,19 +76,20 @@ message ActionOutcomeInteraction {
     int64 updated_at_millis_utc = 4;
 }
 
+message InteractionData {
+    oneof type {
+        QuestionAnswerInteraction question_answer = 1;
+        HypothesisEvidenceInteraction hypothesis_evidence = 2;
+        ActionOutcomeInteraction action_outcome = 3;
+    }
+}
+
 // Update DialecticalInteraction to use the new types
 message DialecticalInteraction {
     STATUS status = 1;
     InteractionType type = 2;
     string id = 3;
-    
-    // One of these based on type
-    oneof interaction {
-        QuestionAnswerInteraction question_answer = 4;
-        HypothesisEvidenceInteraction hypothesis_evidence = 5;
-        ActionOutcomeInteraction action_outcome = 6;
-    }
-    
+    InteractionData interaction = 4;
     PredictionContext prediction_context = 7;
     int64 updated_at_millis_utc = 11;
 }
