@@ -22,6 +22,7 @@ service EpistemicMeService {
     rpc CreateDeveloper(CreateDeveloperRequest) returns (CreateDeveloperResponse) {}
     rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {}
     rpc GetDeveloper(GetDeveloperRequest) returns (GetDeveloperResponse);
+    rpc PreprocessQA(PreprocessQARequest) returns (PreprocessQAResponse) {}
 }
 
 // Request message for listing beliefs.
@@ -174,4 +175,18 @@ message GetDeveloperRequest {
 
 message GetDeveloperResponse {
     Developer developer = 1;
+}
+
+message PreprocessQARequest {
+    repeated string question_blobs = 1;
+    repeated string answer_blobs = 2;
+}
+
+message PreprocessQAResponse {
+    repeated QuestionAnswerPair qa_pairs = 1;
+}
+
+message QuestionAnswerPair {
+    string question = 1;
+    string answer = 2;
 }
