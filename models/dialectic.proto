@@ -54,9 +54,6 @@ message QuestionAnswerInteraction {
     UserAnswer answer = 2;
     repeated Belief extracted_beliefs = 3;
     int64 updated_at_millis_utc = 4;
-    // Perspectives represent other self model interpretations of the 
-    // current question and answer.
-    repeated Perspective perspectives = 5;
 }
 
 // Hypothesis-Evidence interaction for testing beliefs
@@ -91,6 +88,10 @@ message DialecticalInteraction {
     string id = 3;
     InteractionData interaction = 4;
     PredictionContext prediction_context = 7;
+    // Perspectives represent other self model interpretations of the 
+    // current dialectic interaction
+    repeated Perspective perspectives = 8;
+    
     int64 updated_at_millis_utc = 11;
 }
 
