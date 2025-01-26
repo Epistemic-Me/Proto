@@ -63,6 +63,7 @@ message CreateDialecticRequest {
     // to provide perspectives alongside each question and
     // answer dialectic 
     repeated string perspective_model_ids = 3;
+    LearningObjective learning_objective = 4;
 }
 
 // Response message for creating a new dialectic.
