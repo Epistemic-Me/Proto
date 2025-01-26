@@ -150,6 +150,7 @@ message Dialectic {
     BeliefSystem belief_system = 5; // Add this line
     BeliefAnalysis analysis = 6;          // Analysis of the belief system
     LearningObjective learning_objective = 7; // What we want to learn about the user
+    repeated Perspective perspective_selves = 8; // Perspective selves
 }
 
 
