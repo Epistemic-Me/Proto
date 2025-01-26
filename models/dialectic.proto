@@ -111,7 +111,6 @@ enum DialecticType {
 // be some AI system (e.g., LLM) but may evolve to be a human
 // user in the future.
 message Agent {
-
     // Labels the system that is driving the agent's behavior.
     // This may include generating the question, synthesizing
     // the user's answers into beliefs, and then synthesizing
@@ -125,6 +124,14 @@ message Agent {
 
     AgentType agent_type = 1;             // The type of the agent.
     DialecticType dialectic_type = 2;     // The dialectic strategy used by the agent.
+}
+
+// LearningObjective represents what we want to learn about the user
+message LearningObjective {
+    string description = 1;             // Natural language description of what to learn
+    repeated string topics = 2;         // Key topics to explore (e.g., "sleep", "diet", "exercise")
+    BeliefType target_belief_type = 3;  // Type of beliefs to collect
+    bool is_complete = 4;               // Whether we've collected enough beliefs
 }
 
 // The dialectic can be seen as a session that gets created
