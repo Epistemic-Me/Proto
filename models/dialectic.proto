@@ -148,7 +148,8 @@ message Dialectic {
     Agent agent = 3;                      // The agent conducting the dialectic.
     repeated DialecticalInteraction user_interactions = 4; // Interactions within the dialectic.
     BeliefSystem belief_system = 5; // Add this line
-    BeliefAnalysis analysis = 6;  // Add this line
+    BeliefAnalysis analysis = 6;          // Analysis of the belief system
+    LearningObjective learning_objective = 7; // What we want to learn about the user
 }
 
 
