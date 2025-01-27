@@ -131,7 +131,7 @@ message LearningObjective {
     string description = 1;             // Natural language description of what to learn
     repeated string topics = 2;         // Key topics to explore (e.g., "sleep", "diet", "exercise")
     BeliefType target_belief_type = 3;  // Type of beliefs to collect
-    bool is_complete = 4;               // Whether we've collected enough beliefs
+    float completion_percentage = 4;     // Percentage of completion (0-100)
 }
 
 // The dialectic can be seen as a session that gets created
