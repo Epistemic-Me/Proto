@@ -126,21 +126,6 @@ message Agent {
     DialecticType dialectic_type = 2;     // The dialectic strategy used by the agent.
 }
 
-// RangeGroup represents a range of possible values for an observation
-message RangeGroup {
-    double lower_bound = 1;
-    double upper_bound = 2;
-}
-
-// ObservationContext defines the state space for testing falsifiable beliefs
-message ObservationContext {
-    string id = 1;
-    string description = 2;
-    repeated RangeGroup range_groups = 3;  // Defines the possible value ranges
-    double initial_entropy = 4;            // Initial entropy of the state space
-    double current_entropy = 5;            // Current entropy after observations
-}
-
 // LearningObjective represents what we want to learn about the user through falsifiable beliefs
 message LearningObjective {
     string description = 1;                        // Natural language description of what to learn
