@@ -19,6 +19,7 @@ service EpistemicMeService {
     rpc CreateSelfModel(CreateSelfModelRequest) returns (CreateSelfModelResponse) {}
     rpc GetSelfModel(GetSelfModelRequest) returns (GetSelfModelResponse) {}
     rpc AddPhilosophy(AddPhilosophyRequest) returns (AddPhilosophyResponse) {}
+    rpc CreatePhilosophy(CreatePhilosophyRequest) returns (CreatePhilosophyResponse) {}
     rpc CreateDeveloper(CreateDeveloperRequest) returns (CreateDeveloperResponse) {}
     rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {}
     rpc GetDeveloper(GetDeveloperRequest) returns (GetDeveloperResponse);
