@@ -23,6 +23,7 @@ service EpistemicMeService {
     rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {}
     rpc GetDeveloper(GetDeveloperRequest) returns (GetDeveloperResponse);
     rpc PreprocessQuestionAnswer(PreprocessQuestionAnswerRequest) returns (PreprocessQuestionAnswerResponse) {}
+    rpc UpdatePhilosophy(UpdatePhilosophyRequest) returns (UpdatePhilosophyResponse) {}
 }
 
 // Request message for listing beliefs.
@@ -190,4 +191,14 @@ message PreprocessQuestionAnswerResponse {
 message QuestionAnswerPair {
     string question = 1;
     string answer = 2;
+}
+
+message UpdatePhilosophyRequest {
+    string philosophy_id = 1;
+    string description = 2;
+    bool extrapolate_contexts = 3;
+}
+
+message UpdatePhilosophyResponse {
+    Philosophy philosophy = 1;
 }
