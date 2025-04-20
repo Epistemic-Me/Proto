@@ -7,6 +7,7 @@ import "proto/models/dialectic.proto";
 import "proto/models/self_model.proto";
 import "proto/models/developer.proto";
 import "proto/models/user.proto";
+import "proto/models/predictive_processing.proto";
 
 service EpistemicMeService {
     rpc CreateBelief(CreateBeliefRequest) returns (CreateBeliefResponse) {}
@@ -19,10 +20,12 @@ service EpistemicMeService {
     rpc CreateSelfModel(CreateSelfModelRequest) returns (CreateSelfModelResponse) {}
     rpc GetSelfModel(GetSelfModelRequest) returns (GetSelfModelResponse) {}
     rpc AddPhilosophy(AddPhilosophyRequest) returns (AddPhilosophyResponse) {}
+    rpc CreatePhilosophy(CreatePhilosophyRequest) returns (CreatePhilosophyResponse) {}
     rpc CreateDeveloper(CreateDeveloperRequest) returns (CreateDeveloperResponse) {}
     rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {}
     rpc GetDeveloper(GetDeveloperRequest) returns (GetDeveloperResponse);
     rpc PreprocessQuestionAnswer(PreprocessQuestionAnswerRequest) returns (PreprocessQuestionAnswerResponse) {}
+    rpc UpdatePhilosophy(UpdatePhilosophyRequest) returns (UpdatePhilosophyResponse) {}
 }
 
 // Request message for listing beliefs.
@@ -149,6 +152,7 @@ message CreatePhilosophyRequest {
 
 message CreatePhilosophyResponse {
     Philosophy philosophy = 1;
+    repeated ObservationContext extrapolated_observation_contexts = 2;
 }
 
 message CreateDeveloperRequest {
@@ -190,4 +194,15 @@ message PreprocessQuestionAnswerResponse {
 message QuestionAnswerPair {
     string question = 1;
     string answer = 2;
+}
+
+message UpdatePhilosophyRequest {
+    string philosophy_id = 1;
+    string description = 2;
+    bool extrapolate_contexts = 3;
+}
+
+message UpdatePhilosophyResponse {
+    Philosophy philosophy = 1;
+    repeated ObservationContext extrapolated_observation_contexts = 2;
 }
